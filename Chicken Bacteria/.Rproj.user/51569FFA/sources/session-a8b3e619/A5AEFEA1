@@ -3,7 +3,7 @@
     "path": "~/GitHub/Chicken-Bacteria/Chicken Bacteria/MIC_TET RF.R",
     "project_path": "MIC_TET RF.R",
     "type": "r_source",
-    "hash": "1845858130",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1710464878111.0,
@@ -13,15 +13,15 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "30,0",
-        "scrollLine": "10"
+        "cursorPosition": "84,83",
+        "scrollLine": "14"
     },
-    "folds": "",
-    "lastKnownWriteTime": 1710465766,
+    "folds": "56|41|60|0|\n",
+    "lastKnownWriteTime": 1710469804,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1710465766583,
+    "last_content_update": 1710469804769,
     "read_only": false,
     "read_only_alternatives": []
 }

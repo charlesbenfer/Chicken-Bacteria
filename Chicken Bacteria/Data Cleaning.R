@@ -23,12 +23,9 @@ for(i in 1:nrow(Chick_Sal_ARA_mgKg)){
 
 }
 
-
 colnames(Chick_Sal_ARA_mgKg)[c(14,17,20,66,39,65,47,7,10,51)]
 Chick_Sal_ARA_mgKg <- Chick_Sal_ARA_mgKg[,-c(14,17,20,66,39,65,47,7,10,51)]
 
-
-#toDo, research Shappley values, add importance metrics to training code
 
 #Changing the units for MIC_TET, let's start by narrowing down to 2 classes. <=8 vs >=16
 for(i in 1:nrow(Chick_Sal_ARA_mgKg)){
@@ -63,28 +60,24 @@ Chick_Sal_ARA_mgKg[,22] <- as.factor(Chick_Sal_ARA_mgKg[,22])
 levels(Chick_Sal_ARA_mgKg[,22])
 
 
-#Train a RF for MIC_SSS on the train data based on columns 40-56
-rf_SSS <- randomForest(as.formula(paste(colnames(Chick_Sal_ARA_mgKg)[22],
-                                        "~",paste(colnames(Chick_Sal_ARA_mgKg)[c(1:21,23:39,40:56)],
-                                                  collapse = "+"),sep = "")),
-                       data = train, ntree=1000,keep.forest=F,importance=T)
-
-#Test the RF on the test set
-
-
-
-#Poorer performance
-
-
-
-
-#To investigate: keep pushing with Trees, meeting about SWAG
-
 #########
 #MIC_STR#
 #########
+Chick_Sal_ARA_mgKg[,23] <- as.factor(Chick_Sal_ARA_mgKg[,23])
+levels(Chick_Sal_ARA_mgKg[,23])
+Chick_Sal_ARA_mgKg[,23] <- as.character(Chick_Sal_ARA_mgKg[,23])
 
-#The levels for this overlap too much, we should see if we can clear this up
+which(Chick_Sal_ARA_mgKg[,23] == '')
+Chick_Sal_ARA_mgKg_STR <- Chick_Sal_ARA_mgKg[-which(Chick_Sal_ARA_mgKg[,23] == ''),]
+Chick_Sal_ARA_mgKg_STR[,23] <- as.factor(Chick_Sal_ARA_mgKg_STR[,23])
+levels(Chick_Sal_ARA_mgKg_STR[,23])
+Chick_Sal_ARA_mgKg_STR[,23] <- as.character(Chick_Sal_ARA_mgKg_STR[,23])
+for(i in 1:nrow(Chick_Sal_ARA_mgKg_STR)){
+  if(Chick_Sal_ARA_mgKg_STR[i,23]=='32'){Chick_Sal_ARA_mgKg_STR[i,23]<-'<=32'}
+}
+Chick_Sal_ARA_mgKg_STR[,23] <- as.factor(Chick_Sal_ARA_mgKg_STR[,23])
+levels(Chick_Sal_ARA_mgKg_STR[,23])
 
+#To investigate: keep pushing with Trees, meeting about SWAG
 
 ###############################################################################
