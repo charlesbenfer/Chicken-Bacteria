@@ -23,6 +23,11 @@ for(i in 1:nrow(Chick_Sal_ARA_mgKg)){
 
 }
 
+nas<-rep(NA,ncol(Chick_Sal_ARA_mgKg))
+for(i in 1:ncol(Chick_Sal_ARA_mgKg)){
+  nas[i] <- length(which)
+}
+
 colnames(Chick_Sal_ARA_mgKg)[c(14,17,20,66,39,65,47,7,10,51)]
 Chick_Sal_ARA_mgKg <- Chick_Sal_ARA_mgKg[,-c(14,17,20,66,39,65,47,7,10,51)]
 
@@ -40,6 +45,7 @@ for(i in 1:nrow(Chick_Sal_ARA_mgKg)){
 
 Chick_Sal_ARA_mgKg[,25] <- as.factor(Chick_Sal_ARA_mgKg[,25])
 levels(Chick_Sal_ARA_mgKg[,25])
+length(which(Chick_Sal_ARA_mgKg[,25]=='>=16'))
 
 
 #########
@@ -50,15 +56,14 @@ levels(Chick_Sal_ARA_mgKg[,25])
 
 for(i in 1:nrow(Chick_Sal_ARA_mgKg)){
 
-  if(Chick_Sal_ARA_mgKg[i,22] == '<= 16' || Chick_Sal_ARA_mgKg[i,22] == '<=16'|| Chick_Sal_ARA_mgKg[i,22] == '32'
-     || Chick_Sal_ARA_mgKg[i,22] == '64'){Chick_Sal_ARA_mgKg[i,22] <- '<=64'}
-  else Chick_Sal_ARA_mgKg[i,22] <- '>=128'
+  if(Chick_Sal_ARA_mgKg[i,22] == '<= 16' || Chick_Sal_ARA_mgKg[i,22] == '<=16'){Chick_Sal_ARA_mgKg[i,22] <- '<=16'}
+  else Chick_Sal_ARA_mgKg[i,22] <- '>=32'
 
 }
 
 Chick_Sal_ARA_mgKg[,22] <- as.factor(Chick_Sal_ARA_mgKg[,22])
 levels(Chick_Sal_ARA_mgKg[,22])
-
+length(which(Chick_Sal_ARA_mgKg[,22]!="<=16"))
 
 #########
 #MIC_STR#
@@ -69,14 +74,24 @@ Chick_Sal_ARA_mgKg[,23] <- as.character(Chick_Sal_ARA_mgKg[,23])
 
 which(Chick_Sal_ARA_mgKg[,23] == '')
 Chick_Sal_ARA_mgKg_STR <- Chick_Sal_ARA_mgKg[-which(Chick_Sal_ARA_mgKg[,23] == ''),]
+nrow(Chick_Sal_ARA_mgKg_STR)
 Chick_Sal_ARA_mgKg_STR[,23] <- as.factor(Chick_Sal_ARA_mgKg_STR[,23])
 levels(Chick_Sal_ARA_mgKg_STR[,23])
 Chick_Sal_ARA_mgKg_STR[,23] <- as.character(Chick_Sal_ARA_mgKg_STR[,23])
 for(i in 1:nrow(Chick_Sal_ARA_mgKg_STR)){
   if(Chick_Sal_ARA_mgKg_STR[i,23]=='32'){Chick_Sal_ARA_mgKg_STR[i,23]<-'<=32'}
 }
-Chick_Sal_ARA_mgKg_STR[,23] <- as.factor(Chick_Sal_ARA_mgKg_STR[,23])
+length(which(Chick_Sal_ARA_mgKg_STR[,23]=='>64'))
+
+
+
+for(i in 1:nrow(Chick_Sal_ARA_mgKg_STR)){
+  if(Chick_Sal_ARA_mgKg_STR[i,23]=='>64'||Chick_Sal_ARA_mgKg_STR[i,23]=='64'){Chick_Sal_ARA_mgKg_STR[i,23]<-'>=64'}
+  else Chick_Sal_ARA_mgKg_STR[i,23]<-'<=32'
+}
+
 levels(Chick_Sal_ARA_mgKg_STR[,23])
+length(which(Chick_Sal_ARA_mgKg_STR[,23] == '>=64'))
 
 #To investigate: keep pushing with Trees, meeting about SWAG
 

@@ -38,6 +38,10 @@ for(i in 1:nrow(Chick_Sal_ARA_mgKg)){
 colnames(Chick_Sal_ARA_mgKg_SSS)[c(14,17,20,66,39,65,47,7,10,51)]
 Chick_Sal_ARA_mgKg_SSS <- Chick_Sal_ARA_mgKg_SSS[,-c(14,17,20,66,39,65,47,7,10,51)]
 
+Chick_Sal_ARA_mgKg_SSS[,22] <- as.factor(Chick_Sal_ARA_mgKg_SSS[,22])
+levels(Chick_Sal_ARA_mgKg_SSS[,22])
+Chick_Sal_ARA_mgKg_SSS[,22] <- as.character(Chick_Sal_ARA_mgKg_SSS[,22])
+
 for(i in 1:nrow(Chick_Sal_ARA_mgKg_SSS)){
   if(Chick_Sal_ARA_mgKg_SSS[i,22] == '<= 16' || Chick_Sal_ARA_mgKg_SSS[i,22] == '<=16'){
     Chick_Sal_ARA_mgKg_SSS[i,22] <- '<=16'
@@ -47,6 +51,7 @@ for(i in 1:nrow(Chick_Sal_ARA_mgKg_SSS)){
 }
 Chick_Sal_ARA_mgKg_SSS[,22]<-as.factor(Chick_Sal_ARA_mgKg_SSS[,22])
 levels(Chick_Sal_ARA_mgKg_SSS[,22])
+length(which(Chick_Sal_ARA_mgKg_SSS[,22]=='>=256'))
 
 #Run another RF with the more diverse labels
 

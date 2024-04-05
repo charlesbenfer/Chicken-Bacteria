@@ -15,8 +15,8 @@ pred <- pfun(rf_TET_2,rand_pred)[1,1]
 
 X <- subset(Chick_Sal_ARA_mgKg, select = -MIC_TET)
 
-shaps <- explain(rf_TET_2, X = X, pred_wrapper = pfun, nsim = 100,
-                 adjust = TRUE, shap_only = FALSE)
+shaps <- explain(rf_TET_2, X = X, pred_wrapper = pfun, nsim = 10,
+                 adjust = TRUE, shap_only = T)
 
 tibble::as_tibble(shaps$shapley_values)
 
