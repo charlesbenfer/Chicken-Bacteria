@@ -24,7 +24,7 @@ test_STR <- Chick_Sal_ARA_mgKg_STR[ind==2,]
 
 #Train a RF for MIC_SSS on the train data based on columns 40-56
 rf_STR_2 <- randomForest(as.formula(paste(colnames(Chick_Sal_ARA_mgKg_STR)[23],
-                                        "~",paste(colnames(Chick_Sal_ARA_mgKg)[c(1:22,24:56)],
+                                        "~",paste(colnames(Chick_Sal_ARA_mgKg)[c(1:22,24:65)],
                                                   collapse = "+"),sep = "")),
                        data = train, ntree=1000,keep.forest=T,importance=T)
 
