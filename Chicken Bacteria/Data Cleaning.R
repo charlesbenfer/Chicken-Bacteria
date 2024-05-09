@@ -26,11 +26,20 @@ for(i in 1:nrow(Chick_Sal_ARA_mgKg)){
 #Finding which variables have too many NA's
 nas<-rep(NA,ncol(Chick_Sal_ARA_mgKg))
 for(i in 1:ncol(Chick_Sal_ARA_mgKg)){
-  nas[i] <- length(which)
+  nas[i] <- length(which(is.na(Chick_Sal_ARA_mgKg[,i])))
 }
 
-colnames(Chick_Sal_ARA_mgKg)[c(14,17,20,66,39,65,47,7,10,51)]
-Chick_Sal_ARA_mgKg <- Chick_Sal_ARA_mgKg[,-c(14,17,20,66,39,65,47,7,10,51)]
+View(as.matrix(nas))
+colnames(Chick_Sal_ARA_mgKg)[c(14,17,20,66,39,65,47)]
+Chick_Sal_ARA_mgKg <- Chick_Sal_ARA_mgKg[,-c(14,17,20,66,39,65,47)]
+
+#Removing Unnecessary 'C' Variables
+View(Chick_Sal_ARA_mgKg)
+Chick_Sal_ARA_mgKg <- Chick_Sal_ARA_mgKg[,-(29:45)]
+
+#Removing Estab and Region Num variables
+Chick_Sal_ARA_mgKg <- Chick_Sal_ARA_mgKg[,-c(5,8)]
+
 
 #########
 #MIC_TET#
@@ -73,8 +82,8 @@ levels(Chick_Sal_ARA_mgKg[,22])
 #########
 #MIC_STR#
 #########
-Chick_Sal_ARA_mgKg[,23] <- as.factor(Chick_Sal_ARA_mgKg[,23])
-levels(Chick_Sal_ARA_mgKg[,23])
+Chick_Sal_ARA_mgKg[,28] <- as.factor(Chick_Sal_ARA_mgKg[,28])
+levels(Chick_Sal_ARA_mgKg[,28])
 Chick_Sal_ARA_mgKg[,23] <- as.character(Chick_Sal_ARA_mgKg[,23])
 
 which(Chick_Sal_ARA_mgKg[,23] == '')
