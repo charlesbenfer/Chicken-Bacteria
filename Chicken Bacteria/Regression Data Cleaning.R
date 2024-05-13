@@ -3,11 +3,8 @@
 #o MIC_SSS (sulfamethoxazole)
 #o MIC_STR (streptomycin)
 
-library(caret)
-library(ranger)
-library(e1071)
-library(randomForest)
-library(mlbench)
+library(ggplot2)
+library(farver)
 
 
 Chick_Sal_ARA_mgKg <- read.csv("Chick_Sal_ARA_mgKg.csv", row.names=1)
@@ -44,10 +41,13 @@ Chick_Sal_ARA_mgKg <- Chick_Sal_ARA_mgKg[,-c(5,8)]
 #Distribution between classes:
 
 Chick_Sal_ARA_mgKg[,23] <- as.factor(Chick_Sal_ARA_mgKg[,23])
-Chick_Sal_ARA_mgKg[,23] <- as.character(Chick_Sal_ARA_mgKg[,23])
+
 levels(Chick_Sal_ARA_mgKg[,23])
+Chick_Sal_ARA_mgKg[,23] <- as.character(Chick_Sal_ARA_mgKg[,23])
 
 Chick_Sal_ARA_mgKg <- Chick_Sal_ARA_mgKg[-which(Chick_Sal_ARA_mgKg[,23] == ''),]
+
+
 
 #1898 observations
 
@@ -70,7 +70,8 @@ plot(jittered_data$MIC_STR)
 jittered_data$YEAR <- as.factor(jittered_data$YEAR)
 
 ggplot(data = jittered_data, aes(x = YEAR, y = MIC_STR)) +
-  geom_boxplot(aes(fill = YEAR), width = 0.8) + theme_bw()
+  geom_boxplot(aes(fill = YEAR), width = 0.8 )
+
 
 
 
@@ -83,19 +84,4 @@ which(Chick_Sal_ARA_mgKg$datecollected_1 >= '2015-01-01')
 tsplot(Chick_Sal_ARA_mgKg$datecollected_1, y=Chick_Sal_ARA_mgKg$MIC_STR)
 
 
-
-bans <- rep(NA, nrow(Chick_Sal_ARA_mgKg))
-Chick_Sal_ARA_mgKg<- cbind(Chick_Sal_ARA_mgKg, bans)
-
-for(i in 1:nrow(Chick_Sal_ARA_mgKg)){
-  if(Chick_Sal_ARA_mgKg[i,2] == 2013){Chick_Sal_ARA_mgKg[i,50]<-0}
-  if( Chick_Sal_ARA_mgKg[i,2] >= 2014 & Chick_Sal_ARA_mgKg[i,2] <= 2017){Chick_Sal_ARA_mgKg[i,50]<-1}
-  if( Chick_Sal_ARA_mgKg[i,2] >= 2018){Chick_Sal_ARA_mgKg[i,50]<- 2}
-}
-
-tsplot(Chick_Sal_ARA_mgKg[Chick_Sal_ARA_mgKg$bans == 0,29], y=Chick_Sal_ARA_mgKg[Chick_Sal_ARA_mgKg$bans == 0,23])
-tsplot(Chick_Sal_ARA_mgKg[Chick_Sal_ARA_mgKg$bans == 1,29], y=Chick_Sal_ARA_mgKg[Chick_Sal_ARA_mgKg$bans == 1,23])
-tsplot(Chick_Sal_ARA_mgKg[Chick_Sal_ARA_mgKg$bans == 2,29], y=Chick_Sal_ARA_mgKg[Chick_Sal_ARA_mgKg$bans == 2,23])
-
-mean(Chick_Sal_ARA_mgKg[Chick_Sal_ARA_mgKg$bans == 0,23])
 
